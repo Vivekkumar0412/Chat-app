@@ -1,4 +1,5 @@
 import { WebSocketServer, WebSocket, type RawData } from "ws";
+import MessageHandler from "./messageHandler.js";
 
 
 interface IncomingMessage {
@@ -7,9 +8,10 @@ interface IncomingMessage {
 }
 export class ConnectionManager {
     private wss: WebSocketServer;
-
+    private messageHandler : MessageHandler;
     constructor(port: number) {
-        this.wss = new WebSocketServer({ port })
+        this.wss = new WebSocketServer({ port });
+        this.messageHandler = new MessageHandler;
         this.init_connection();
     };
 
@@ -43,11 +45,17 @@ export class ConnectionManager {
                 return;
             }
 
-            console.log(`the type of data is ${parsedData.type} and content is ${parsedData.payload}`)
+            console.log(`the type of data is ${parsedData.type} and content is ${parsedData.payload}`);
+            this.messageHandler.register(parsedData.type,this.handle_chat);
+            this.messageHandler.handle(parsedData.type,parsedData.payload);
         } catch (error) {
             socket.close();
         }
     };
+
+    handle_chat(){
+        console.log("just for testing")
+    }
 
     private handle_disconnect_client(){
         console.log("client disconneted");
