@@ -9,9 +9,9 @@ interface IncomingMessage {
 export class ConnectionManager {
     private wss: WebSocketServer;
     private messageHandler : MessageHandler;
-    constructor(port: number) {
+    constructor(port: number, messageHandler: MessageHandler) {
         this.wss = new WebSocketServer({ port });
-        this.messageHandler = new MessageHandler;
+        this.messageHandler =  messageHandler;
         this.init_connection();
     };
 
