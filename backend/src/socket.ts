@@ -25,7 +25,6 @@ wss.on("connection", (socket: WebSocket) => {
         }
 
     });
-
     socket.on("close", () => {
         console.log("Client disconnected")
     });
