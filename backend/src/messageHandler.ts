@@ -13,7 +13,7 @@ export default class MessageHandler {
     handle(type: string, payload: unknown) {
         const handler = this.handlers.get(type);
         if (!handler) {
-            console.log("no handler exists fro this type");
+            console.log("no handler exists fro this type exit");
             return;
         };
 
