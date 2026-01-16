@@ -2,6 +2,7 @@ type HandlerFun = (payload: unknown) => void;
 
 export default class MessageHandler {
     private handlers: Map<string, HandlerFun>
+    private handlers: Map<string, HandlerFun>
     constructor() {
         this.handlers = new Map();
     };
